@@ -3,6 +3,7 @@ package com.canornot;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,11 +26,31 @@ public class GameWelcomeActivity extends Activity {
 		layout.setBackgroundResource(R.drawable.background_welcome);
 		
 		alphaAnimation = new AlphaAnimation(0, 1);
-		alphaAnimation.setDuration(3000);
+		alphaAnimation.setDuration(5000);
 		layout.setAnimation(alphaAnimation);
 		layout.startAnimation(alphaAnimation);
+		
+		mHandler.sendEmptyMessageDelayed(GOTO_MAIN_ACTIVITY, 3000);//3ÃëÌø×ª
 	}
 
+	private static final int GOTO_MAIN_ACTIVITY = 0;
+    private Handler mHandler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+ 
+            switch (msg.what) {
+                case GOTO_MAIN_ACTIVITY:
+                    Intent intent = new Intent();
+                    intent.setClass(GameWelcomeActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+ 
+                default:
+                    break;
+            }
+        };
+    };
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		

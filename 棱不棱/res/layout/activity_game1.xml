@@ -9,7 +9,12 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="100sp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="点击下面聚宝盆开始游戏"
+        android:textColor="#ffff0000"
+        android:textSize="25sp" />
 
     <ImageButton
         android:id="@+id/iBtnPress1"

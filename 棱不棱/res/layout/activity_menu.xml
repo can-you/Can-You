@@ -4,24 +4,34 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".GameWelcomeActivity" >
+    tools:context=".GameWelcomeActivity" 
+    android:background="@drawable/background_menu">
 
     <Button
+        android:layout_margin="10sp"
         android:id="@+id/btnGame1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_game1" />
 
     <Button
+        android:layout_margin="10sp"
         android:id="@+id/btnGame2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_game2" />
 
+    <Button 
+        android:id="@+id/btnGameHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_gamehelp"/>
+    
     <Button
+        android:layout_margin="10sp"
         android:id="@+id/btnExitGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_exit" />
+        android:background="@drawable/button_exitgame" />
 
 </LinearLayout>

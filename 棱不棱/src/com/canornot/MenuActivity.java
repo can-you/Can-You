@@ -2,6 +2,7 @@ package com.canornot;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +15,8 @@ public class MenuActivity extends Activity implements OnClickListener {
 	private Button btnGame1;
 	private Button btnGame2;
 	private Button btnExit;
+	private Button btnGameHelp;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,17 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 		btnGame1 = (Button) findViewById(R.id.btnGame1);
 		btnGame2 = (Button) findViewById(R.id.btnGame2);
+		btnGameHelp = (Button) findViewById(R.id.btnGameHelp);
 		btnExit = (Button) findViewById(R.id.btnExitGame);
 
 		btnGame1.setOnClickListener(this);
 		btnGame2.setOnClickListener(this);
+		btnGameHelp.setOnClickListener(this);
 		btnExit.setOnClickListener(this);
+
+		MediaPlayer player = MediaPlayer.create(this, R.raw.background);
+		player.setLooping(true);
+		player.start();
 
 	}
 
@@ -44,7 +53,11 @@ public class MenuActivity extends Activity implements OnClickListener {
 		case R.id.btnGame2:
 			break;
 			
+		case R.id.btnGameHelp:
+			break;
+
 		case R.id.btnExitGame:
+			System.exit(0);
 			break;
 		}
 	}

@@ -76,7 +76,7 @@ public class GoldcoinView extends View{
 		setNumGoldcoins(numGoidcoins + quantities);
 	}
 	
-	public void subtractFlakes(int quantities) {
+	public void subtractGoldcoins(int quantities) {
         for (int i = 0; i < quantities; ++i) {
             int index = numGoidcoins - i - 1;
             goldcoinList.remove(index);

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="您的得分是："
+        android:text="您的金币数是："
         android:textSize="30sp" />
 
     <TextView
@@ -20,13 +20,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="倒计时"
-        android:textColor="#FFFFBA00"
+        android:textColor="#FFFF0000"
         android:textSize="40sp" />
 
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical" />
 
