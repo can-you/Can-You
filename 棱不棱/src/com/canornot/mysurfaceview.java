@@ -1,27 +1,29 @@
 package com.canornot;
-
+import java.io.IOException;
 import java.util.Random;
 import java.util.Vector;
 
-import com.canornot.PLAYER;
-import com.canornot.R;
-import com.canornot.R.drawable;
-import com.canornot.R.string;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class mysurfaceview extends SurfaceView implements android.view.SurfaceHolder.Callback, Runnable{
 	
-
+	private SharedPreferences speasy;
+	private SharedPreferences sphard;
+	
 	private SurfaceHolder sfh;
 	public Paint paint;
 	public Canvas canvas;
@@ -31,11 +33,13 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 	private Bitmap boomm;
 	private Bitmap bmover;
 	private Bitmap grade;
+	private Bitmap grademax;
 	private Bitmap bmover1;
 	private Bitmap bmover2;
-	private Bitmap bmover3;
+//	private Bitmap bmover3;
 	private Bitmap mbm;
 	private Bitmap mbm1;
+	private Bitmap mbm2;
 	private Bitmap simple;
 	private Bitmap hard;
 	public static int screenW, screenH;
@@ -47,6 +51,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 	public static int gg;
 	public static int bb;
 	public static int gametime;
+	public static int gradeindex;
 	private Vector<enemy> vcenemy;
 	private int tim ;
 	private int cout;
@@ -58,11 +63,16 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 	private int x;
 	private int y;
 	private int overcount;
-	
 	private int gamecount;
 	private Thread th;
 	boolean flag;
 	boolean k;
+	boolean easym;
+	boolean hardm;
+	private MediaPlayer mediaplayer1;
+	private MediaPlayer mediaplayer2;
+	private MediaPlayer mediaover;
+//	private AudioManager am;
 	PLAYER pls;
 	gameover gm;
 	menu me;
@@ -70,14 +80,28 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 	public mysurfaceview(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
+		speasy = context.getSharedPreferences("easysave", Context.MODE_PRIVATE);
+		sphard = context.getSharedPreferences("hardsave", Context.MODE_PRIVATE);
 		sfh=this.getHolder();
 		sfh.addCallback(this);
 		
+		mediaplayer1=MediaPlayer.create(context, R.raw.music1);
+		mediaplayer1.setLooping(true);
+		mediaplayer2=MediaPlayer.create(context, R.raw.music2);
+		mediaplayer2.setLooping(true);
+		mediaover=MediaPlayer.create(context, R.raw.over);
+	
+	//	am=(AudioManager)MainActivity.instance.getSystemService(Context.AUDIO_SERVICE);
+	//	MainActivity.instance.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		paint=new Paint();
 		paint.setAntiAlias(true);
 		paint.setColor(Color.BLACK);
 		paint.setStrokeWidth(50);
 		paint.setTextSize(80);
+		
+		setFocusableInTouchMode(true);
+		setKeepScreenOn(true);
+		setFocusable(true);
 		
 	}
 	
@@ -95,7 +119,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		// TODO Auto-generated method stub
 		
 		init();
-		
+		mediaplayer1.start();
 		flag=true;
 		th = new Thread(this);
 		th.start();
@@ -106,7 +130,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		// TODO Auto-generated method stub
 		flag=false;
 	}
-		@Override
+	//	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
 		switch(state){
@@ -123,6 +147,33 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		}
 		return true;
 	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode==KeyEvent.KEYCODE_BACK)
+		{
+			if(state==GAMING||state==OVER)
+			{
+				init();
+				mediaplayer2.pause();
+				mediaover.pause();
+				mediaplayer1.seekTo(0);
+				mediaplayer1.start();
+				
+				
+				
+			}
+			else if(state == START)
+			{
+				game22.instance.finish();
+				System.exit(0);
+				
+			}
+		}
+		return true;
+	}
+
+
 	public void init(){
 		state = START;
 		k=false;
@@ -132,9 +183,10 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		gametime=0;
 		mbm = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu);
 		mbm1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu1);
+		mbm2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu2);
 		simple =BitmapFactory.decodeResource(this.getResources(), R.drawable.simple);
 		hard =BitmapFactory.decodeResource(this.getResources(), R.drawable.hard);
-		me = new menu(mbm,mbm1,simple,hard,0,0);
+		me = new menu(mbm,mbm1,mbm2,simple,hard,0,0);
 		
 		bmplayer =BitmapFactory.decodeResource(this.getResources(),R.drawable.player);
 		pls=new PLAYER(bmplayer,screenW/2,screenH/2);
@@ -151,38 +203,44 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		bmover = BitmapFactory.decodeResource(this.getResources(), R.drawable.over);
 		gmf = new gameoverfront(bmover, screenW/2, screenH/2);
 		grade = BitmapFactory.decodeResource(this.getResources(), R.drawable.grade);
+		grademax = BitmapFactory.decodeResource(this.getResources(), R.drawable.grademax);
 		bmover1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.over1);
 		bmover2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.over2);
-		bmover3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.over3);
+	//	bmover3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.over3);
 		
 		
-		gm = new gameover(grade,bmover1,bmover2,bmover3,screenW/2,screenH/2);
+		gm = new gameover(grade,grademax,bmover1,bmover2,screenW/2,screenH/2);
 		
 	}
 	public void mydraw(){
 		if(pp==1){
 			init();
 			state=GAMING;
+			mediaover.pause();
+			mediaplayer2.seekTo(0);
+			mediaplayer2.start();
 			pp=0;
 		}
 		if(gg!=0){
 			init();
+			mediaplayer1.pause();
+	        mediaplayer2.seekTo(0);	
+			mediaplayer2.start();
+			
+			
 			state=GAMING;
 			if(gg==1)
 			{	tim=10;
-				enemyArray=new int[][]{{1,2,5,6},{3,4},{1,2,5},{4},{1,2,3,4,5,6},{2},{1,4},{5,6},{1,3,4,5}
-						,{1,2,4,5,6},{1,3,4},{2,5,6,2},{3,3,5,6,2},{4,3,5,4},{1,2,3,4,5,6},{2,3,4,5},{1,3,6}
-						,{1,1,2,2,3,3,4,4,5,5,6,6},{2,3,4,5,6},{1,2,3,4},{1,2,4,5,6},{1,1,2,2,5,5,6},{1,2,3,4,5,6,6,6}
-						,{2,3,4,5,6},{1,2,3},{2,3,4,5,6},{2,2,3,4,5},{2,3,4,5,6},{1,2,3,4,5,6,5,6,6,6},{4,5,6},{4,5},{6,6}
-						,{1,2,3,4,5,6},{1,1,2,2,3,3,4,4,5,5,6,6},{1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6}
-						,{1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6}
-						,{1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5,6,6,6,6,6,}
-						,{1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6}
-						,{1,1,1,1,1,1,1,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,6,6,6}
+				easym=true;
+				hardm=false;
+				enemyArray=new int[][]{{6},{3,6},{1,6,6},{6},{1,2,3,4,5,6}
+						
 						};
 			}
 			else if(gg==2)
-			{	tim=30;
+			{	hardm=true;
+				easym=false;
+				tim=30;
 				enemyArray=new int[][]{{1,1,2,2,3,3,4,4,5,5,6,6},{1,2,3,4,5,6,3,3,2,2,5,6,6},{1,3,4,5,5,6,3,2,2,5,6,4}
 						,{4,5,5,6,6,5,2,2,2,3,3,4,5,1,1,2,1,1,2,3},{2,4,4,4,3,3,3,2,1,1,2,2,3,4,5,5,5,6,6,6,3,1,1,2,3,4}
 					 ,{1,1,1,2,2,2,3,4,4,4,4,5,5,5,5,6,6,6,6,3,3,3,4,5,3},{2,3,4,4,4,4,2,2,2,2,5,5,6,6,6,6,6,6,2,3,4,5,3}
@@ -198,11 +256,11 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 			}
 			gg=0;
 		}
-		if(bb==1)
-		{
-			init();
-			bb=0;
-		}
+//		if(bb==1)
+//		{
+//			init();
+//			bb=0;
+//		}
 		try{
 			canvas = sfh.lockCanvas();
 			if (canvas != null) {
@@ -219,6 +277,10 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 				
 						
 						case GAMING:
+									if(easym)
+										gradeindex = speasy.getInt("high", 0);
+									else
+										gradeindex = sphard.getInt("high", 0);
 							        me.mydraw(canvas, paint);
 									canvas.drawText(String.valueOf(gametime), 20, 80, paint);
 									pls.mydraw(canvas, paint);
@@ -229,15 +291,32 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 										
 									}	
 									break;
-						case OVER:
-									me.mydraw(canvas, paint);
+						case OVER:	
+									if(easym){
+										if(gametime>speasy.getInt("high", 0))
+										{
+											speasy.edit().putInt("high", gametime).commit();
+											
+										}
+									}
+									else
+									{	if(gametime>sphard.getInt("high", 0))
+										{
+											sphard.edit().putInt("high", gametime).commit();
+										
+										}
+										
+									}
+									
 									if(overcount>15){
+										 me.mydraw(canvas, paint);
 										gm.grade(canvas, paint);
 										gm.myview1(canvas, paint);
 										gm.myview2(canvas, paint);
-										gm.myview3(canvas, paint);
+									//	gm.myview3(canvas, paint);
 									}
 									else{
+										me.mydraw2(canvas, paint);
 										overcount++;
 										gmf.myview(canvas, paint);
 									}
@@ -281,6 +360,9 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 							if(pls.iscollsion(vcenemy.elementAt(i))){
 								state = OVER;
 								overcount=0;
+								mediaplayer2.pause();
+								mediaover.seekTo(0);
+								mediaover.start();
 							}
 						}
 					}

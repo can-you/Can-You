@@ -2,8 +2,6 @@ package com.canornot;
 
 import java.util.Random;
 
-import com.canornot.mysurfaceview;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;

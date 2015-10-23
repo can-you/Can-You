@@ -1,7 +1,5 @@
 package com.canornot;
 
-import com.canornot.mysurfaceview;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -10,10 +8,10 @@ import android.view.MotionEvent;
 
 public class menu {
 	
-	private Bitmap mbm,mbm1;
+	private Bitmap mbm,mbm1,mbm2;
 	private Bitmap simple,hard;
 	private int x,y;
-	private int framew,frameh,framew1,frameh1,framebtnh,framebtnw;
+	private int framew,frameh,framew1,frameh1,framew2,frameh2,framebtnh,framebtnw;
 	private int mx,my;
 	private float p,q;
 	private int flag;
@@ -21,12 +19,13 @@ public class menu {
 	private int count;
 	private int findex;
 	private int fw1,fh1,fbtnw,fbtnh;
-	public menu(Bitmap mbm, Bitmap mbm1,Bitmap simple,Bitmap hard, int x, int y) {
+	public menu(Bitmap mbm, Bitmap mbm1,Bitmap mbm2,Bitmap simple,Bitmap hard, int x, int y) {
 		// TODO Auto-generated constructor stubframew=mbm.getWidth();
-		maxf=3;
+		maxf=4;
 		frameh=mbm.getHeight();
 		framew=mbm.getWidth();
-		
+		frameh2=mbm2.getHeight();
+		framew2=mbm2.getWidth();
 		framew1=mbm1.getWidth()/maxf;
 		frameh1=mbm1.getHeight();
 		fw1=mysurfaceview.screenW;
@@ -39,6 +38,7 @@ public class menu {
 				
 		this.mbm=mbm;
 		this.mbm1=mbm1;
+		this.mbm2=mbm2;
 		this.simple = simple;
 		this.hard = hard;
 		this.x=x;
@@ -59,6 +59,7 @@ public class menu {
 		
 	
 	}
+	
 	public void mydraw1(Canvas canvas,Paint paint)
 	{
 		p=((float)mysurfaceview.screenW)/framew1;
@@ -72,6 +73,21 @@ public class menu {
 		
 		canvas.drawBitmap(bstm, 0-fw1*findex, 0, paint);
 		
+	}
+	public void mydraw2(Canvas canvas,Paint paint)
+	{	
+		//canvas.clipRect(0,0,framew,frameh);
+		p=((float)mysurfaceview.screenW)/framew2;
+		q=((float)mysurfaceview.screenH)/frameh2;
+		//p=(float) 0.7;
+		//q=(float)1;
+		Matrix mat = new Matrix();
+		mat.postScale(p, q);
+		Bitmap bstm = Bitmap.createBitmap(mbm2 , 0,0,mbm2.getWidth(),mbm2.getHeight(),
+				 mat,true);
+		canvas.drawBitmap(bstm, x, y, paint);
+		
+	
 	}
 	public void mydrawsimple(Canvas canvas,Paint paint)
 	{

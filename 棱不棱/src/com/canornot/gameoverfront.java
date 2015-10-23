@@ -1,7 +1,5 @@
 package com.canornot;
 
-import com.canornot.mysurfaceview;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -32,9 +30,9 @@ public class gameoverfront {
 		  
 		   Bitmap dstbmp = Bitmap.createBitmap(bmover, 0, 0, bmover.getWidth(), bmover.getHeight(),  
 	               mat, true);
-		   canvas.clipRect(x-fw/2, y-fh/2, x-fw/2+fw, y-fh/2+fh);
+		   canvas.clipRect(x-fw/2, y-fh/2+y/2+y/8, x-fw/2+fw, y-fh/2+y/2+y/8+fh);
 		   
-		   canvas.drawBitmap(dstbmp, x-fw/2-fw*findex, y-fh/2, paint);
+		   canvas.drawBitmap(dstbmp, x-fw/2-fw*findex, y-fh/2+y/2+y/8, paint);
   }
 	  public void logic()
 	   {

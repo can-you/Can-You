@@ -41,21 +41,23 @@ public final class R {
         public static final int button_style=0x7f02000d;
         public static final int goldcoin=0x7f02000e;
         public static final int grade=0x7f02000f;
-        public static final int hard=0x7f020010;
-        public static final int ic_launcher=0x7f020011;
-        public static final int left1=0x7f020012;
-        public static final int left2=0x7f020013;
-        public static final int menu=0x7f020014;
-        public static final int menu1=0x7f020015;
-        public static final int over=0x7f020016;
-        public static final int over1=0x7f020017;
-        public static final int over2=0x7f020018;
-        public static final int over3=0x7f020019;
-        public static final int player=0x7f02001a;
-        public static final int ranking_textview=0x7f02001b;
-        public static final int right1=0x7f02001c;
-        public static final int right2=0x7f02001d;
-        public static final int simple=0x7f02001e;
+        public static final int grademax=0x7f020010;
+        public static final int hard=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int left1=0x7f020013;
+        public static final int left2=0x7f020014;
+        public static final int menu=0x7f020015;
+        public static final int menu1=0x7f020016;
+        public static final int menu2=0x7f020017;
+        public static final int over=0x7f020018;
+        public static final int over1=0x7f020019;
+        public static final int over2=0x7f02001a;
+        public static final int over3=0x7f02001b;
+        public static final int player=0x7f02001c;
+        public static final int ranking_textview=0x7f02001d;
+        public static final int right1=0x7f02001e;
+        public static final int right2=0x7f02001f;
+        public static final int simple=0x7f020020;
     }
     public static final class id {
         public static final int action_settings=0x7f0a000d;
@@ -89,6 +91,9 @@ public final class R {
     public static final class raw {
         public static final int background=0x7f050000;
         public static final int goldcoin=0x7f050001;
+        public static final int music1=0x7f050002;
+        public static final int music2=0x7f050003;
+        public static final int over=0x7f050004;
     }
     public static final class string {
         public static final int action_settings=0x7f070002;
