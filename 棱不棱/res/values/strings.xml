@@ -7,5 +7,6 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_game1">Game1Activity</string>
     <string name="title_activity_ranking">RankingActivity</string>
+    <string name="title_activity_help">HelpActivity</string>
 
 </resources>

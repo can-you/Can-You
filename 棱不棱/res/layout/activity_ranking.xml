@@ -2,35 +2,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_menu"
+    android:background="@drawable/background"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.canornot.RankingActivity" 
-    android:gravity="center">
+    tools:context="com.canornot.RankingActivity" >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20sp"
         android:src="@drawable/ranking_textview" />
+
+    <ImageView
+        android:id="@+id/ivStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
     <TextView
         android:id="@+id/tvCurrentScore"
-        android:layout_margin="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="本次获得金币数为："
+        android:layout_margin="2sp"
+        android:text="本次记录为："
         android:textColor="#ffffffff"
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/tvHighestScore"
-        android:layout_margin="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="历史最高金币数为："
+        android:layout_margin="2sp"
+        android:text="历史最高逗比值为："
         android:textColor="#ffffffff"
         android:textSize="30sp" />
 

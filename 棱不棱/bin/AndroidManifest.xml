@@ -35,8 +35,12 @@
             android:label="@string/title_activity_ranking" >
         </activity>
         <activity
-            android:name="com.canornot.game22"
-            ></activity>
+            android:name=".HelpActivity"
+            android:label="@string/title_activity_help" >
+        </activity>
+        <activity
+            android:name=".Game2Activity">
+        </activity>
     </application>
 
 </manifest>

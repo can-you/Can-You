@@ -1,4 +1,5 @@
 package com.canornot;
+
 import java.math.MathContext;
 
 import android.graphics.Bitmap;
@@ -54,9 +55,9 @@ public class gameover {
 	  
 	   Bitmap dstbmp = Bitmap.createBitmap(bmover1, 0, 0, bmover1.getWidth(), bmover1.getHeight(),  
                mat, true);
-	   canvas.clipRect(x-fw1/2, y-fh1/2-mysurfaceview.screenH/4-y/8, x-fw1/2+fw1, y-fh1/2-mysurfaceview.screenH/4+fh1-y/8);
+	   canvas.clipRect(x-fw1/2, y-fh1/2-mysurfaceview.screenH/4, x-fw1/2+fw1, y-fh1/2-mysurfaceview.screenH/4+fh1);
 	   
-	   canvas.drawBitmap(dstbmp, x-fw1/2-fw1*findex, y-fh1/2-mysurfaceview.screenH/4-y/8, paint);
+	   canvas.drawBitmap(dstbmp, x-fw1/2-fw1*findex, y-fh1/2-mysurfaceview.screenH/4, paint);
 	   canvas.restore();
    }
    public void grade(Canvas canvas,Paint paint){

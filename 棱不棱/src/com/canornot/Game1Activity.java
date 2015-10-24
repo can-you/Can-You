@@ -1,34 +1,38 @@
 package com.canornot;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Game1Activity extends Activity implements OnClickListener {
+public class Game1Activity extends Activity {
 
-	private GoldcoinView goldcoinView; // 金币掉落的主体动画
-	private ImageButton iBtnPress1, iBtnPress2;
-	private TextView tvScore, tvTime;
-	private int score;
-	private PopupWindow popupWindow;
+	private ImageButton rotateButton;
+	private ImageView image1;
+	private ImageView image2;
+	private ImageView image3;
+	private ImageView image4;
+	private ImageView image5;
 
-	SharedPreferences sp;
+	TextView firstTextView;
+	TextView tvTime;
+	TextView tvRemind;
+	int score = 0;
+
+	public SharedPreferences sp;
+	private int time;
+	private MediaPlayer doubi;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,138 +40,78 @@ public class Game1Activity extends Activity implements OnClickListener {
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 		setContentView(R.layout.activity_game1);
 
-		goldcoinView = new GoldcoinView(this);
+		sp = this.getSharedPreferences("Game1RankData", MODE_PRIVATE);
 
-		iBtnPress1 = (ImageButton) findViewById(R.id.iBtnPress1);
-
-		iBtnPress1.setOnClickListener(this);
-
-		goldcoin = MediaPlayer.create(this, R.raw.goldcoin);
 		MediaPlayer player = MediaPlayer.create(this, R.raw.background);
 		player.setLooping(true);
 		player.start();
+		doubi = MediaPlayer.create(this, R.raw.doubi);
 
-		sp = this.getSharedPreferences("Game1RankData", Context.MODE_WORLD_READABLE+Context.MODE_WORLD_WRITEABLE);
+		time = 21;
 
-	}
+		image1 = (ImageView) findViewById(R.id.doubi1);
+		image2 = (ImageView) findViewById(R.id.doubi2);
+		image3 = (ImageView) findViewById(R.id.doubi3);
+		image4 = (ImageView) findViewById(R.id.doubi4);
+		image5 = (ImageView) findViewById(R.id.doubi5);
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.iBtnPress1:
-			showPopWindows(iBtnPress1, "20", true);
-			break;
-		}
-	}
+		firstTextView = (TextView) findViewById(R.id.firstTextView);
+		tvTime = (TextView) findViewById(R.id.tvTime);
+		tvRemind = (TextView) findViewById(R.id.tvRemind);
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		goldcoinView.resume();
-	}
+		rotateButton = (ImageButton) findViewById(R.id.rotateButton);
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		goldcoinView.pause();
-	}
-
-	int time = 20;
-	private MediaPlayer goldcoin;
-
-	private PopupWindow showPopWindows(View view, String string, boolean show) {
-
-		view = this.getLayoutInflater().inflate(R.layout.view_gold_drop, null);
-
-		iBtnPress2 = (ImageButton) view.findViewById(R.id.ibtnPress2);
-		tvScore = (TextView) view.findViewById(R.id.tvScore);
-		tvTime = (TextView) view.findViewById(R.id.tvTime);
-
-		final LinearLayout container = (LinearLayout) view
-				.findViewById(R.id.container);
-		container.addView(goldcoinView);
-
-		final Timer timer;
-		timer = new Timer();
-		TimerTask task = new TimerTask() {
-
-			@Override
-			public void run() {
-
-				runOnUiThread(new Runnable() {
-					public void run() {
-						tvTime.setText("" + time);
-						time--;
-						if (time < 0) {
-							timer.cancel();
-							tvTime.setText("时间到！");
-							iBtnPress2.setEnabled(false);
-							container.removeAllViews();
-
-							int index = sp.getInt("HighestScore", -1);
-							int currentScore = sp.getInt("CurrentScore", -2);
-							if (index == -1 && currentScore == -2) {
-								sp.edit().putInt("HighestScore", score);
-								sp.edit().putInt("CurrentScore", score);
-							} else if (score > index) {
-								index = score;
-								sp.edit().putInt("HighestScore", index);
-								sp.edit().putInt("CurrentScore", score);
-							}
-
-							Intent intent = new Intent(Game1Activity.this,
-									RankingActivity.class);
-							startActivity(intent);
-
-						}
-					}
-				});
-
-			}
-		};
-
-		timer.schedule(task, 1000, 1000);
-
-		iBtnPress2.setOnClickListener(new OnClickListener() {
+		// 为图片按钮添加触屏监听
+		rotateButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				score++;
-				tvScore.setText("您的金币数是：" + score);
-				goldcoin.start();
+				switch (v.getId()) {
+				case R.id.rotateButton:
+					tvRemind.setVisibility(View.INVISIBLE);
+					score++;
+					doubi.start();
+					firstTextView.setText("当前逗比值为：" + score);
+
+					AnimationSet animationSet = new AnimationSet(true);
+					RotateAnimation rotateAnimation = new RotateAnimation(0,
+							720, Animation.RELATIVE_TO_SELF, 0.5f,
+							Animation.RELATIVE_TO_SELF, 0.5f);
+					rotateAnimation.setDuration(1000);
+					animationSet.addAnimation(rotateAnimation);
+					TranslateAnimation translateAnimation = new TranslateAnimation(
+							Animation.RELATIVE_TO_SELF, 0f,
+							Animation.RELATIVE_TO_SELF, 0f,
+							Animation.RELATIVE_TO_SELF, 0f,
+							Animation.RELATIVE_TO_SELF, 7f);
+					translateAnimation.setDuration(500);
+					animationSet.addAnimation(translateAnimation);
+
+					int c = score % 5;
+					switch (c) {
+					case 0:
+						image1.startAnimation(animationSet);
+						break;
+					case 1:
+						image2.startAnimation(animationSet);
+						break;
+					case 2:
+						image3.startAnimation(animationSet);
+						break;
+					case 3:
+						image4.startAnimation(animationSet);
+						break;
+					case 4:
+						image5.startAnimation(animationSet);
+						break;
+					}
+					break;
+				}
 			}
 		});
-
-		popupWindow = new PopupWindow(view,
-				FrameLayout.LayoutParams.MATCH_PARENT,
-				FrameLayout.LayoutParams.MATCH_PARENT);
-		popupWindow.setOutsideTouchable(true);
-		popupWindow.setFocusable(true);
-		popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-		// final Thread thread = new Thread(new Runnable() {
-		// @Override
-		// public void run() {
-		// try {
-		// // 设置2秒后
-		// Thread.sleep(2000);
-		// runOnUiThread(new Runnable() {
-		// @Override
-		// public void run() {
-		// container.removeAllViews();
-		// }
-		// });
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// }
-		// });
-		// if (time == 0)
-		// thread.start();
-
-		return popupWindow;
 	}
+		
 }

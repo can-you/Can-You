@@ -32,8 +32,8 @@ public class PLAYER {
 		count=0;
 		framew = bmplayer.getWidth()/maxf;
 		frameh = bmplayer.getHeight();
-		fw = mysurfaceview.screenW/6;
-		fh = mysurfaceview.screenH/8;
+		fw = mysurfaceview.screenW/4;
+		fh = mysurfaceview.screenH/6;
 		this.x=x;
 		this.y=y;
 		this.bmplayer=bmplayer;
@@ -42,7 +42,7 @@ public class PLAYER {
 	public void mydraw(Canvas canvas,Paint paint)
 	{	canvas.save();
 		Matrix mat = new Matrix();
-		mat.postScale((float)mysurfaceview.screenW/(6*framew),(float)mysurfaceview.screenH/(8*frameh));
+		mat.postScale((float)mysurfaceview.screenW/(4*framew),(float)mysurfaceview.screenH/(6*frameh));
 		Bitmap dstbmp = Bitmap.createBitmap(bmplayer, 0, 0, bmplayer.getWidth(), bmplayer.getHeight(),  
 	               mat, true);
 		canvas.clipRect(x-fw/2, y-fh/2, x-fw/2+fw, y-fh/2+fh);

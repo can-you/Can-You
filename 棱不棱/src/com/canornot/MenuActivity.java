@@ -46,20 +46,23 @@ public class MenuActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btnGame1:
-			Intent intent = new Intent(MenuActivity.this, Game1Activity.class);
-			startActivity(intent);
+			Intent intentGame1 = new Intent(MenuActivity.this, Game1Activity.class);
+			startActivity(intentGame1);
 			break;
 
 		case R.id.btnGame2:
-			Intent intent2 = new Intent(MenuActivity.this, game22.class);
-			startActivity(intent2);
+			Intent intentGame2 = new Intent(MenuActivity.this, Game2Activity.class);
+			startActivity(intentGame2);
 			break;
 			
 		case R.id.btnGameHelp:
+			Intent intentHelp = new Intent(MenuActivity.this, HelpActivity.class);
+			startActivity(intentHelp);
 			break;
 
 		case R.id.btnExitGame:
 			System.exit(0);
+			finish();
 			break;
 		}
 	}

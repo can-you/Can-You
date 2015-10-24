@@ -11,15 +11,17 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RankingActivity extends Activity implements OnClickListener {
 
 	private Button btnRunBackToMenu;
 	private Button btnExitGame;
-	SharedPreferences sp;
+	public static SharedPreferences sp;
 	private TextView tvCurrentScore;
 	private TextView tvHighestScore;
+	private ImageView ivStar;
 	
 	
 	@Override
@@ -31,25 +33,68 @@ public class RankingActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_ranking);
 
 		MediaPlayer player = MediaPlayer.create(this, R.raw.background);
+		
+		MediaPlayer over = MediaPlayer.create(this, R.raw.over_game1);
+		over.start();
 		player.setLooping(true);
 		player.start();
+		
+		
+		
 		
 		btnRunBackToMenu = (Button) findViewById(R.id.btnRunBackToMenu);
 		btnExitGame = (Button)findViewById(R.id.btnExitGame);
 		tvCurrentScore = (TextView) findViewById(R.id.tvCurrentScore);
 		tvHighestScore = (TextView) findViewById(R.id.tvHighestScore);
+		ivStar = (ImageView) findViewById(R.id.ivStar);
 		
 		btnRunBackToMenu.setOnClickListener(this);
 		btnExitGame.setOnClickListener(this);
 		
-		sp = this.getPreferences(Context.MODE_WORLD_READABLE+Context.MODE_WORLD_WRITEABLE);
+		sp = getSharedPreferences("Game1RankData",
+				MODE_PRIVATE);
 		int currentScore = sp.getInt("CurrentScore", -2);
 		int highestScore = sp.getInt("HighestScore", -1);
 		if(highestScore != -1 && currentScore != -2){
 			tvCurrentScore.setText("本次获得金币数为："+currentScore);
 			tvHighestScore.setText("历史最高金币数为："+highestScore);
 		}
+		sp.edit().commit();
 		
+		Intent intent = getIntent();
+		int score = intent.getIntExtra("CurrentScore", -1);
+		int flag = 0;
+		if(score <= 150){
+			flag = 1;
+		}else if (score <= 180) {
+			flag = 2;
+		}else if(score <= 200){
+			flag = 3;
+		}else if (score <= 250) {
+			flag = 4;
+		}else{
+			flag = 5;
+		}
+		
+		switch(flag){
+		case 1:
+			ivStar.setImageResource(R.drawable.one_star);
+			break;
+		case 2:
+			ivStar.setImageResource(R.drawable.two_stars);
+			break;	
+		case 3:
+			ivStar.setImageResource(R.drawable.three_stars);
+			break;
+		case 4:
+			ivStar.setImageResource(R.drawable.four_stats);
+			break;
+		case 5:
+			ivStar.setImageResource(R.drawable.five_stars);
+			break;
+		}
+		String string = "本次记录:  " + score;
+		tvCurrentScore .setText(string);
 		
 	}
 
