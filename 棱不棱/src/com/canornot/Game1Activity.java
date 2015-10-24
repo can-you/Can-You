@@ -1,9 +1,16 @@
 package com.canornot;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -32,6 +39,7 @@ public class Game1Activity extends Activity {
 
 	public SharedPreferences sp;
 	private int time;
+	private Timer timer = new Timer();
 	private MediaPlayer doubi;
 
 	@Override
@@ -112,6 +120,55 @@ public class Game1Activity extends Activity {
 				}
 			}
 		});
+
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case 1:
+					tvTime.setText("" + time);
+					if (time == 0) {
+						timer.cancel();
+						tvTime.setText("Ê±¼äµ½£¡");
+						rotateButton.setEnabled(false);
+
+						Editor editor = sp.edit();
+
+						int index = sp.getInt("HighestScore", -1);
+						if (score > index) {
+							index = score;
+						}
+						editor.putInt("HighestScore", index);
+						editor.putInt("CurrentScore", score);
+						sp.edit().commit();
+
+						editor.commit();
+
+						Intent intent = new Intent(Game1Activity.this,
+								RankingActivity.class);
+						intent.putExtra("CurrentScore", score);
+						startActivity(intent);
+
+					}
+				}
+			}
+		};
+
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+
+				time--;
+
+				Message message = new Message();
+				message.what = 1;
+				handler.sendMessage(message);
+
+			}
+		};
+
+		timer.schedule(task, 1000, 1000);
+
 	}
-		
+
 }
