@@ -46,23 +46,24 @@ public final class R {
         public static final int grademax=0x7f020015;
         public static final int hard=0x7f020016;
         public static final int ic_launcher=0x7f020017;
-        public static final int left1=0x7f020018;
-        public static final int left2=0x7f020019;
-        public static final int menu=0x7f02001a;
-        public static final int menu1=0x7f02001b;
-        public static final int menu2=0x7f02001c;
-        public static final int one_star=0x7f02001d;
-        public static final int over=0x7f02001e;
-        public static final int over1=0x7f02001f;
-        public static final int over2=0x7f020020;
-        public static final int over3=0x7f020021;
-        public static final int player=0x7f020022;
-        public static final int ranking_textview=0x7f020023;
-        public static final int right1=0x7f020024;
-        public static final int right2=0x7f020025;
-        public static final int simple=0x7f020026;
-        public static final int three_stars=0x7f020027;
-        public static final int two_stars=0x7f020028;
+        public static final int laji=0x7f020018;
+        public static final int left1=0x7f020019;
+        public static final int left2=0x7f02001a;
+        public static final int menu=0x7f02001b;
+        public static final int menu1=0x7f02001c;
+        public static final int menu2=0x7f02001d;
+        public static final int one_star=0x7f02001e;
+        public static final int over=0x7f02001f;
+        public static final int over1=0x7f020020;
+        public static final int over2=0x7f020021;
+        public static final int over3=0x7f020022;
+        public static final int player=0x7f020023;
+        public static final int ranking_textview=0x7f020024;
+        public static final int right1=0x7f020025;
+        public static final int right2=0x7f020026;
+        public static final int simple=0x7f020027;
+        public static final int three_stars=0x7f020028;
+        public static final int two_stars=0x7f020029;
     }
     public static final class id {
         public static final int action_settings=0x7f090013;
@@ -71,11 +72,11 @@ public final class R {
         public static final int btnGame2=0x7f09000c;
         public static final int btnGameHelp=0x7f09000d;
         public static final int btnRunBackToMenu=0x7f090012;
-        public static final int doubi1=0x7f090003;
-        public static final int doubi2=0x7f090004;
-        public static final int doubi3=0x7f090005;
-        public static final int doubi4=0x7f090006;
-        public static final int doubi5=0x7f090007;
+        public static final int doubi1=0x7f090002;
+        public static final int doubi2=0x7f090003;
+        public static final int doubi3=0x7f090004;
+        public static final int doubi4=0x7f090005;
+        public static final int doubi5=0x7f090006;
         public static final int firstTextView=0x7f090001;
         public static final int game_welcome=0x7f09000a;
         public static final int ivStar=0x7f09000f;
@@ -83,8 +84,8 @@ public final class R {
         public static final int rotateButton=0x7f090009;
         public static final int tvCurrentScore=0x7f090010;
         public static final int tvHighestScore=0x7f090011;
-        public static final int tvRemind=0x7f090008;
-        public static final int tvTime=0x7f090002;
+        public static final int tvRemind=0x7f090007;
+        public static final int tvTime=0x7f090008;
     }
     public static final class layout {
         public static final int activity_game1=0x7f030000;

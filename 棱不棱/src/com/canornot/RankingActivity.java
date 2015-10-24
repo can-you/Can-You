@@ -56,8 +56,8 @@ public class RankingActivity extends Activity implements OnClickListener {
 		int currentScore = sp.getInt("CurrentScore", -2);
 		int highestScore = sp.getInt("HighestScore", -1);
 		if(highestScore != -1 && currentScore != -2){
-			tvCurrentScore.setText("本次获得金币数为："+currentScore);
-			tvHighestScore.setText("历史最高金币数为："+highestScore);
+			tvCurrentScore.setText("本次记录："+currentScore);
+			tvHighestScore.setText("最高记录："+highestScore);
 		}
 		sp.edit().commit();
 		
@@ -65,14 +65,17 @@ public class RankingActivity extends Activity implements OnClickListener {
 		int score = intent.getIntExtra("CurrentScore", -1);
 		int flag = 0;
 		if(score <= 150){
+			flag = 6;
+		}
+		else if(score <= 160){
 			flag = 1;
 		}else if (score <= 180) {
 			flag = 2;
-		}else if(score <= 200){
+		}else if(score <= 230){
 			flag = 3;
 		}else if (score <= 250) {
 			flag = 4;
-		}else{
+		}else if(score <= 260){
 			flag = 5;
 		}
 		
@@ -92,6 +95,8 @@ public class RankingActivity extends Activity implements OnClickListener {
 		case 5:
 			ivStar.setImageResource(R.drawable.five_stars);
 			break;
+		case 6:
+			ivStar.setImageResource(R.drawable.laji);
 		}
 		String string = "本次记录:  " + score;
 		tvCurrentScore .setText(string);
