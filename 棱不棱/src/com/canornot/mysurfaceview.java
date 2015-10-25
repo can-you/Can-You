@@ -40,6 +40,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 	private Bitmap mbm;
 	private Bitmap mbm1;
 	private Bitmap mbm2;
+	private Bitmap mbm3;
 	private Bitmap simple;
 	private Bitmap hard;
 	public static int screenW, screenH;
@@ -89,7 +90,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		mediaplayer1.setLooping(true);
 		mediaplayer2=MediaPlayer.create(context, R.raw.music2);
 		mediaplayer2.setLooping(true);
-		mediaover=MediaPlayer.create(context, R.raw.over_game1);
+		mediaover=MediaPlayer.create(context, R.raw.over);
 	
 	//	am=(AudioManager)MainActivity.instance.getSystemService(Context.AUDIO_SERVICE);
 	//	MainActivity.instance.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -101,7 +102,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		
 		setFocusableInTouchMode(true);
 		setKeepScreenOn(true);
-		setFocusable(true);
+	//	setFocusable(true);
 		
 	}
 	
@@ -117,7 +118,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		screenW = this.getWidth();
 		screenH = this.getHeight();
 		// TODO Auto-generated method stub
-		
+	
 		init();
 		mediaplayer1.start();
 		flag=true;
@@ -150,6 +151,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
+	
 		if(keyCode==KeyEvent.KEYCODE_BACK)
 		{
 			if(state==GAMING||state==OVER)
@@ -184,9 +186,10 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 		mbm = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu);
 		mbm1 = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu1);
 		mbm2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu2);
+		mbm3 = BitmapFactory.decodeResource(this.getResources(), R.drawable.menu3);
 		simple =BitmapFactory.decodeResource(this.getResources(), R.drawable.simple);
 		hard =BitmapFactory.decodeResource(this.getResources(), R.drawable.hard);
-		me = new menu(mbm,mbm1,mbm2,simple,hard,0,0);
+		me = new menu(mbm,mbm1,mbm2,mbm3,simple,hard,0,0);
 		
 		bmplayer =BitmapFactory.decodeResource(this.getResources(),R.drawable.player);
 		pls=new PLAYER(bmplayer,screenW/2,screenH/2);
@@ -233,24 +236,35 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 			{	tim=10;
 				easym=true;
 				hardm=false;
-				enemyArray=new int[][]{{6},{3,6},{1,6,6},{6},{1,2,3,4,5,6}
-						
+				enemyArray=new int[][]{
+						{1,2,6},{3,6},{1,6,6},{6},{3,4,5,6},{2,3},{2,3,4},{1,2,3,5,6},{1,5,6},
+						{2,3},{3,4},{4,5},{5,6},{6,1},{1,2},{5,6},{1,1},{2,2},{3,3},{4,5},{5,5},{6,6},{1,2,3},{4,5,6},
+						{1,2,3},{4,5,6},{1,2},{2,3},{4,5},{6,6},{2,4},{1,6},{1},{2,3,4},{3,4,5,6},{1,3,4,5},{2,3,4},
+						{3,6},{4,1},{2,5},{6,6},{3,3,4,4},{5,6},{1,2,3,4},{1,2,3},{3,4,6},{4,5,5,6},{1,2,3,6},{2,4,5,6},
+						{3,3,4,5},{1,2,3,4},{2,3,4,5},{3,4,5,6},{5,6,1,2},{1,2,3,4},{5,5,6,6},{1,2,5,6},{3,3,4,4},{5,5,6,6},
+						{1,2,3,4,5,6},{1,2,3,4},{4,3,4,5},{3,4,5,6},{5,5,3,2,6},{5,5,5,5},{6,6,6,6},{1,2,3,4,6},{1,2,3},{4,5,6},
+						{1,2,3,4},{5,6,7,8},{1,2,4,5,6},{1,2,3,4,5},{4,4},{5,5,5,5,5},{6,6,6,6,6,6},{1,1,2,2},{2,2,3,3},
+						{1,2,3,4,5},{2,3,4,5,6},{6,6,6,6,6,6},{1,2,3,4,5,6},{6,6,6},{5,5,5},{2,3,3,3,3},{3,4,4,4,4},{5,6,6,6,6},
+						{6,3,3,3,3},{2,3,4,5,6,6},{1,1,2,3,3,4,5,6,6},{1,1,1,1,1,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5,6,6,6,6,6},
+						{1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6}
 						};
 			}
 			else if(gg==2)
 			{	hardm=true;
 				easym=false;
-				tim=30;
-				enemyArray=new int[][]{{1,1,2,2,3,3,4,4,5,5,6,6},{1,2,3,4,5,6,3,3,2,2,5,6,6},{1,3,4,5,5,6,3,2,2,5,6,4}
-						,{4,5,5,6,6,5,2,2,2,3,3,4,5,1,1,2,1,1,2,3},{2,4,4,4,3,3,3,2,1,1,2,2,3,4,5,5,5,6,6,6,3,1,1,2,3,4}
-					 ,{1,1,1,2,2,2,3,4,4,4,4,5,5,5,5,6,6,6,6,3,3,3,4,5,3},{2,3,4,4,4,4,2,2,2,2,5,5,6,6,6,6,6,6,2,3,4,5,3}
-				,{1,1,1,1,1,1,1,1,2,2,3,4,4,4,5,5,5,6,6,5,4,4,4,3,3,3,4},{2,3,4,5,6,2,2,1,1,1,1,1,1,1,2,2,3,3,4,5,5,6,6}
-				,{1,1,1,2,2,2,3,3,3,3,4,4,5,5,5,5,6,6,6,6,5,5,5,4,4,4,3,3,3,2,2,2,1,3,2,2,3,3,4,5,6,6,4,4,5},{1,2,4,2,3,3}
-				,{3,2,2,2,2,3,3,4,5,5,5,5,5,6,6,6,6,5,6},{2,4,4,5,6,4,3,3,2,3,4,5},{1,2,2,3,4,5,},{4,2,3,4,2,2,2,1,1,}
-				,{2,3,4,5,6,1,1,1,1,1,1,2,2,2,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,2,2,2,2,2,2,2,2,2,2,2}
-				,{1,2,3,4,5,6,1,2,3,4,5,6},{1,2,2,3,3,4,4,4,3,2,3,3,2,2,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,3,4,5,6},{4,5,6,2,3}
-				,{1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,3,3,4,4}
-				,{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,6,6,6,6,6}
+				tim=8;
+				enemyArray=new int[][]{
+						{1,1},{2,2},{3,3},{4,4},{5,5},{6,6},{1,1},{2,2},{3,3},{6,6},{6,6},{1,2,3,4,5,6},
+						{1,1,1,1},{2,2,2,2},{3,3,3,3},{4,4,4,4},{5,5,5,5},{6,6,6,6},{1,1,1,1},{2,2,2,2},{3,3,3,3},{6,6,6,6},{5,5,5,5},{6,6,6,6},{1,2,3,4,5,6},
+						{1,1,1},{2,2,2},{3,3,3},{4,4,4},{5,5,5},{6,6,6},{1,1,1},{2,2,2},{3,3,3},{6,6,6},{5,5,5},{6,6,6},{1,2,3,4,5,6},
+						{1,1,1},{2,2,2},{3,3,3},{4,4,4},{5,5,5},{6,6,6},{1,1,1},{2,2,2},{3,3,3},{6,6,6},{5,5,5},{6,6,6},{1,2,3,4,5,6},
+						{1,1,1,1},{2,2,2,2},{3,3,3,3},{4,4,4,4},{5,5,5,5},{6,6,6,6},{1,1,1,1},{2,2,2,2},{3,3,3,3},{6,6,6,6},{5,5,5,5},{6,6,6,6},{1,2,3,4,5,6},
+						{1,1,1,1},{2,2,2,2},{3,3,3,3},{4,4,4,4},{5,5,5,5},{6,6,6,6},{1,1,1,1},{2,2,2,2},{3,3,3,3},{6,6,6,6},{5,5,5,5},{6,6,6,6},{1,2,3,4,5,6},
+						{1,1,1,1},{2,2,2,2},{3,3,3,3},{4,4,4,4},{5,5,5,5},{6,6,6,6},{1,1,1,1},{2,2,2,2},{3,3,3,3},{6,6,6,6},{5,5,5,5},{6,6,6,6},{1,2,3,4,5,6},
+						{1,1,1,1,1},{2,2,2,2,2},{3,3,3,3,3},{4,4,4,4,4},{5,5,5,5,5},{6,6,6,6,6},{1,1,1,1,1},{2,2,2,2,2},{3,3,3,3,3},{6,6,6,6,6,6},{5,5,5,5,5},{6,6,6,6,6},{1,2,3,4,5,6},
+						{1,1,1,1,1},{2,2,2,2,2},{3,3,3,3,3},{4,4,4,4,4},{5,5,5,5,5},{6,6,6,6,6},{1,1,1,1,1},{2,2,2,2,2},{3,3,3,3,3},{6,6,6,6,6,6},{5,5,5,5,5},{6,6,6,6,6},{1,2,3,4,5,6},
+						{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},
+						{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6},{1,2,3,4,5,6}
 				};
 				
 			}
@@ -307,14 +321,16 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 										}
 										
 									}
-									me.mydraw2(canvas, paint);
+									
 									if(overcount>15){
+										 me.mydraw3(canvas, paint);
 										gm.grade(canvas, paint);
 										gm.myview1(canvas, paint);
 										gm.myview2(canvas, paint);
 									//	gm.myview3(canvas, paint);
 									}
 									else{
+										me.mydraw2(canvas, paint);
 										overcount++;
 										gmf.myview(canvas, paint);
 									}
@@ -372,7 +388,7 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 						for(int i=0;i<enemyArray[index].length;i++)
 						{	
 							if(enemyArray[index][i]<5){
-								y=random.nextInt(screenH-100)+50;
+								y=random.nextInt(screenH);
 								if(y<screenH/2){
 									if(enemyArray[index][i]==1)
 									{
@@ -397,33 +413,36 @@ public class mysurfaceview extends SurfaceView implements android.view.SurfaceHo
 								{
 									if(enemyArray[index][i]==1)
 									{
-										vcenemy.addElement(new enemy(eplayerr1, 5, -50, y));
+										vcenemy.addElement(new enemy(eplayerl1, 5, -50, y));
 									}
 									
 									else if(enemyArray[index][i]==2)
 									{
-										vcenemy.addElement(new enemy(eplayerr2, 6, -50, y));
+										vcenemy.addElement(new enemy(eplayerl2, 6, -50, y));
 									}
 									else if(enemyArray[index][i]==3)
 									{
-										vcenemy.addElement(new enemy(eplayerl1, 7, screenW+50, y));
+										vcenemy.addElement(new enemy(eplayerr1, 7, screenW+50, y));
 									}
 									else if(enemyArray[index][i]==4)
 									{
-										vcenemy.addElement(new enemy(eplayerl2, 8, screenW+50, y));
+										vcenemy.addElement(new enemy(eplayerr2, 8, screenW+50, y));
 									}	
 									
 								}
 							}
 							else
-							{	x=random.nextInt(screenW-100)+50;
+							{	x=random.nextInt(screenW);
 								if(enemyArray[index][i]==5)
-								{
-									vcenemy.addElement(new enemy(eplayerl2, 9, x, screenH+50));
+								{	
+									if(x<screenW/2)
+									vcenemy.addElement(new enemy(boomm, 9, x, screenH+50));
+									else
+										vcenemy.addElement(new enemy(boomm, 10, x, screenH+50));
 								}
-								else
+								if(enemyArray[index][i]==6)
 								{
-									vcenemy.addElement(new enemy(boomm, 10, x, -50));
+									vcenemy.addElement(new enemy(boomm, 11, x, -50));
 								}
 							}
 							if (index == enemyArray.length - 1) {

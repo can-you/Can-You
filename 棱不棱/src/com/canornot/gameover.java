@@ -31,10 +31,10 @@ public class gameover {
 	   frameh2 = (int)bmover2.getHeight();
 	  
 	   
-	   fw1=(int)mysurfaceview.screenW/2;
-	   fh1=(int)mysurfaceview.screenH/2;   
+	   fw1=(int)mysurfaceview.screenW*2/5;
+	   fh1=(int)mysurfaceview.screenH*2/5;   
 	   fw2=(int)mysurfaceview.screenW*2/4;
-	   fh2=(int)mysurfaceview.screenH/6;
+	   fh2=(int)mysurfaceview.screenH/7;
 	   
 	   this.grade = grade;
 	   this.grademax = grademax;
@@ -50,14 +50,14 @@ public class gameover {
    public void myview1(Canvas canvas,Paint paint){
 	  canvas.save();
 	   Matrix mat = new Matrix();
-	  mat.postScale((float)mysurfaceview.screenW/(2*framew1), (float)mysurfaceview.screenH/(2*frameh1));
+	  mat.postScale((float)mysurfaceview.screenW*2/(5*framew1), (float)mysurfaceview.screenH*2/(5*frameh1));
 	 //  canvas.scale((float)mysurfaceview.screenW/(2*framew),(float)mysurfaceview.screenH/(2*frameh));
 	  
 	   Bitmap dstbmp = Bitmap.createBitmap(bmover1, 0, 0, bmover1.getWidth(), bmover1.getHeight(),  
                mat, true);
-	   canvas.clipRect(x-fw1/2, y-fh1/2-mysurfaceview.screenH/4, x-fw1/2+fw1, y-fh1/2-mysurfaceview.screenH/4+fh1);
+	   canvas.clipRect(x-fw1/2, y-fh1/2-mysurfaceview.screenH/4-y/8, x-fw1/2+fw1, y-fh1/2-mysurfaceview.screenH/4+fh1-y/8);
 	   
-	   canvas.drawBitmap(dstbmp, x-fw1/2-fw1*findex, y-fh1/2-mysurfaceview.screenH/4, paint);
+	   canvas.drawBitmap(dstbmp, x-fw1/2-fw1*findex, y-fh1/2-mysurfaceview.screenH/4-y/8, paint);
 	   canvas.restore();
    }
    public void grade(Canvas canvas,Paint paint){
@@ -71,10 +71,10 @@ public class gameover {
 	  // canvas.save();
 	   if(flag==0){
 		   Matrix mat = new Matrix();
-		   mat.postScale((float)mysurfaceview.screenW*2/(4*framew2), (float)mysurfaceview.screenH/(6*frameh2));
+		   mat.postScale((float)mysurfaceview.screenW*2/(4*framew2), (float)mysurfaceview.screenH/(7*frameh2));
 		   Bitmap dstbmp = Bitmap.createBitmap(bmover2, 0, 0, bmover2.getWidth(), bmover2.getHeight()   ,  
 	               mat, true);  
-		   canvas.drawBitmap(dstbmp, x-fw2/2, y+fh2+y/5, paint);
+		   canvas.drawBitmap(dstbmp, x-fw2/2, y*2-fh2-y/10, paint);
 	   }
 	   if(flag==1){
 	   
@@ -82,7 +82,7 @@ public class gameover {
 		   mat.postScale((float)0.9*mysurfaceview.screenW*2/(4*framew2), (float)0.9*mysurfaceview.screenH/(6*frameh2));
 		   Bitmap dstbmp = Bitmap.createBitmap(bmover2, 0, 0, bmover2.getWidth(), bmover2.getHeight()   ,  
 	               mat, true);  
-		   canvas.drawBitmap(dstbmp, x-fw2/2+fw2/20,y+fh2+y/5+fh2/20, paint);
+		   canvas.drawBitmap(dstbmp, x-fw2/2+fw2/20,y*2-fh2-y/10+fh2/20, paint);
 		   
 		   
 	   }

@@ -52,11 +52,11 @@ public final class R {
         public static final int menu=0x7f02001b;
         public static final int menu1=0x7f02001c;
         public static final int menu2=0x7f02001d;
-        public static final int one_star=0x7f02001e;
-        public static final int over=0x7f02001f;
-        public static final int over1=0x7f020020;
-        public static final int over2=0x7f020021;
-        public static final int over3=0x7f020022;
+        public static final int menu3=0x7f02001e;
+        public static final int one_star=0x7f02001f;
+        public static final int over=0x7f020020;
+        public static final int over1=0x7f020021;
+        public static final int over2=0x7f020022;
         public static final int player=0x7f020023;
         public static final int ranking_textview=0x7f020024;
         public static final int right1=0x7f020025;

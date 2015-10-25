@@ -18,21 +18,21 @@ public class gameoverfront {
 		   framew = (int)bmover.getWidth()/maxf;
 		   frameh = (int)bmover.getHeight();
 		   fw=(int)mysurfaceview.screenW/2;
-		   fh=(int)mysurfaceview.screenH/2;
+		   fh=(int)mysurfaceview.screenH/6;
 		   this.bmover = bmover;
 		   this.x = x;
 		   this.y = y;
 	}
 	 public void myview(Canvas canvas,Paint paint){
 	   	  Matrix mat = new Matrix();
-		  mat.postScale((float)mysurfaceview.screenW/(2*framew), (float)mysurfaceview.screenH/(2*frameh));
+		  mat.postScale((float)mysurfaceview.screenW/(2*framew), (float)mysurfaceview.screenH/(6*frameh));
 		 //  canvas.scale((float)mysurfaceview.screenW/(2*framew),(float)mysurfaceview.screenH/(2*frameh));
 		  
 		   Bitmap dstbmp = Bitmap.createBitmap(bmover, 0, 0, bmover.getWidth(), bmover.getHeight(),  
 	               mat, true);
-		   canvas.clipRect(x-fw/2, y-fh/2+y/2+y/8, x-fw/2+fw, y-fh/2+y/2+y/8+fh);
+		   canvas.clipRect(x-fw/2-x/4, y*2-fh-y/10, x-fw/2-x/4+fw, y*2-fh-y/10+fh);
 		   
-		   canvas.drawBitmap(dstbmp, x-fw/2-fw*findex, y-fh/2+y/2+y/8, paint);
+		   canvas.drawBitmap(dstbmp, x-fw/2-x/4-fw*findex, y*2-fh-y/10, paint);
   }
 	  public void logic()
 	   {
