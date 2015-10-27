@@ -8,5 +8,9 @@
     <string name="title_activity_game1">Game1Activity</string>
     <string name="title_activity_ranking">RankingActivity</string>
     <string name="title_activity_help">HelpActivity</string>
+    <string name="teach1">跳过教学</string>
+    <string name="teach2"> 下一步</string>
+    <string name="teach3">上一步</string>
+    <string name="teach4"> 第一关，走起</string>
 
 </resources>
