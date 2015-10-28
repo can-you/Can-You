@@ -12,7 +12,6 @@ import android.widget.Button;
 
 public class Game1_First_Descrip extends Activity implements OnClickListener{
 	private Button nextPage,jumpPage;
-	private Game1_MySurfaceView faceview=null;
 	public static int width;
 	public static int height;
 	@Override
@@ -24,7 +23,6 @@ public class Game1_First_Descrip extends Activity implements OnClickListener{
 		//显示自定义的SurfaceView视图
 		
 		setContentView(R.layout.game1_first_descrip);
-		faceview=(Game1_MySurfaceView)findViewById(R.id.mysurfaceview);
 		
 		nextPage=(Button)findViewById(R.id.nextPage);
 		jumpPage=(Button)findViewById(R.id.jumpPage);

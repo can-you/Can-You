@@ -12,5 +12,6 @@
     <string name="teach2"> 下一步</string>
     <string name="teach3">上一步</string>
     <string name="teach4"> 第一关，走起</string>
+    <drawable name="buttoncolor">#9999FF</drawable>
 
 </resources>

@@ -9,29 +9,27 @@
        android:layout_width="fill_parent"
        android:layout_height="fill_parent"
        android:gravity="right">
-       <Button 
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/jumpPage"
-           android:text="@string/teach1"
-          
-           />
-       <Button 
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+
+       <Button
            android:id="@+id/nextPage"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
            android:layout_alignParentBottom="true"
-           android:text="@string/teach2"  />
+           android:layout_alignParentRight="true"
+           android:background="@drawable/buttoncolor"
+           android:text="@string/teach2" />
+
+       <Button
+           android:id="@+id/jumpPage"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentTop="true"
+           android:background="@drawable/buttoncolor"
+           android:text="@string/teach1" />
+    
    </RelativeLayout>
-   <FrameLayout 
-       android:layout_width="fill_parent"
-       android:layout_height="fill_parent">
-       <com.canornot.Game1_MySurfaceView
-           android:id="@+id/mysurfaceview"
-           android:layout_width="fill_parent"
-           android:layout_height="fill_parent">
-       </com.canornot.Game1_MySurfaceView>
-    </FrameLayout>
+  
 
 </LinearLayout>
 
