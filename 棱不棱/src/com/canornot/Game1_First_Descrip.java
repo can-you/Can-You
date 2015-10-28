@@ -14,6 +14,7 @@ public class Game1_First_Descrip extends Activity implements OnClickListener{
 	private Button nextPage,jumpPage;
 	public static int width;
 	public static int height;
+	private Game1_MySurfaceView surfaceView=null;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class Game1_First_Descrip extends Activity implements OnClickListener{
 		
 		nextPage=(Button)findViewById(R.id.nextPage);
 		jumpPage=(Button)findViewById(R.id.jumpPage);
+		surfaceView=(Game1_MySurfaceView)findViewById(R.id.game1_mysurfaceView);
 		
 		nextPage.setOnClickListener(this);
 		jumpPage.setOnClickListener(this);

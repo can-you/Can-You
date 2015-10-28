@@ -29,6 +29,16 @@
            android:text="@string/teach1" />
     
    </RelativeLayout>
+   
+   <FrameLayout  
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content">  
+       <com.canornot.Game1_MySurfaceView
+           android:id="@+id/game1_mysurfaceView" 
+            android:layout_width="fill_parent" 
+            android:layout_height="fill_parent">  
+       </com.canornot.Game1_MySurfaceView>  
+    </FrameLayout>
   
 
 </LinearLayout>

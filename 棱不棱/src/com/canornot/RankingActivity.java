@@ -8,20 +8,28 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RankingActivity extends Activity implements OnClickListener {
 
 	private Button btnRunBackToMenu;
-	private Button btnExitGame;
+	private Button btnRunToGame;
+	private Button btnRunSecondGame;
+	
 	public static SharedPreferences sp;
 	private TextView tvCurrentScore;
 	private TextView tvHighestScore;
 	private ImageView ivStar;
+	
+	private AlphaAnimation alphaAnimation_rank;
+	private LinearLayout linear;
 	
 	
 	@Override
@@ -31,6 +39,12 @@ public class RankingActivity extends Activity implements OnClickListener {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_ranking);
+		
+		linear = (LinearLayout) findViewById(R.id.rank_activity);
+		alphaAnimation_rank = new AlphaAnimation(0, 1);
+		alphaAnimation_rank.setDuration(9000);
+		linear.setAnimation(alphaAnimation_rank);
+		linear.startAnimation(alphaAnimation_rank);
 
 		MediaPlayer player = MediaPlayer.create(this, R.raw.background);
 		
@@ -43,13 +57,15 @@ public class RankingActivity extends Activity implements OnClickListener {
 		
 		
 		btnRunBackToMenu = (Button) findViewById(R.id.btnRunBackToMenu);
-		btnExitGame = (Button)findViewById(R.id.btnExitGame);
+		btnRunToGame = (Button)findViewById(R.id.btnRunToGame);
+		btnRunSecondGame=(Button)findViewById(R.id.btnRunSecondGame);
 		tvCurrentScore = (TextView) findViewById(R.id.tvCurrentScore);
 		tvHighestScore = (TextView) findViewById(R.id.tvHighestScore);
 		ivStar = (ImageView) findViewById(R.id.ivStar);
 		
 		btnRunBackToMenu.setOnClickListener(this);
-		btnExitGame.setOnClickListener(this);
+		btnRunToGame.setOnClickListener(this);
+		btnRunSecondGame.setOnClickListener(this);
 		
 		sp = getSharedPreferences("Game1RankData",
 				MODE_PRIVATE);
@@ -108,12 +124,16 @@ public class RankingActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnRunBackToMenu:
 			startActivity(new Intent(RankingActivity.this,MenuActivity.class));
+			
 			break;
 
-		case R.id.btnExitGame:
-			finish();
-			System.exit(0);
+		case R.id.btnRunToGame:
+			
+			startActivity(new Intent(RankingActivity.this,Game1Activity.class));
 			break;
+		case R.id.btnRunSecondGame:
+			
+			startActivity(new Intent(RankingActivity.this,Game2Activity.class));
 		}
 		
 	}

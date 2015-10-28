@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rank_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -40,19 +41,24 @@
         android:textSize="30sp" />
 
     <Button
+        android:id="@+id/btnRunSecondGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:background="@drawable/button_runsecondgame" />
+
+    <Button
+        android:id="@+id/btnRunToGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@drawable/button_replaygame" />
+
+    <Button
         android:id="@+id/btnRunBackToMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="10sp"
         android:background="@drawable/button_runbacktomenu" />
-
-    <Button
-        android:id="@+id/btnExitGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10sp"
-        android:background="@drawable/button_replaygame" />
 
 </LinearLayout>
