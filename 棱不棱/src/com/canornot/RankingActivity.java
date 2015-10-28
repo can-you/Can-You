@@ -1,6 +1,8 @@
 package com.canornot;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +29,7 @@ public class RankingActivity extends Activity implements OnClickListener {
 	private TextView tvCurrentScore;
 	private TextView tvHighestScore;
 	private ImageView ivStar;
-	
+	public static int score;
 	private AlphaAnimation alphaAnimation_rank;
 	private LinearLayout linear;
 	
@@ -78,7 +80,7 @@ public class RankingActivity extends Activity implements OnClickListener {
 		sp.edit().commit();
 		
 		Intent intent = getIntent();
-		int score = intent.getIntExtra("CurrentScore", -1);
+		 score = intent.getIntExtra("CurrentScore", -1);
 		int flag = 0;
 		if(score <= 150){
 			flag = 6;
@@ -121,19 +123,30 @@ public class RankingActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		AlertDialog.Builder builder=new Builder(RankingActivity.this);
 		switch (v.getId()) {
 		case R.id.btnRunBackToMenu:
 			startActivity(new Intent(RankingActivity.this,MenuActivity.class));
+			RankingActivity.this.finish();
 			
 			break;
 
 		case R.id.btnRunToGame:
 			
 			startActivity(new Intent(RankingActivity.this,Game1Activity.class));
+			RankingActivity.this.finish();
 			break;
 		case R.id.btnRunSecondGame:
-			
+			if(score<=150){
+				 builder.setMessage("打穿第一关先，少年，");
+			        builder.setPositiveButton("我 去", null);
+			        builder.show();
+			}
+			else {
 			startActivity(new Intent(RankingActivity.this,Game2Activity.class));
+			RankingActivity.this.finish();
+			break;
+			}
 		}
 		
 	}

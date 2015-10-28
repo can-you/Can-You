@@ -148,6 +148,7 @@ public class Game1Activity extends Activity {
 								RankingActivity.class);
 						intent.putExtra("CurrentScore", score);
 						startActivity(intent);
+						Game1Activity.this.finish();
 
 					}
 				}
