@@ -26,7 +26,7 @@ public class GameWelcomeActivity extends Activity {
 		layout.setBackgroundResource(R.drawable.background_welcome);
 		
 		alphaAnimation = new AlphaAnimation(0, 1);
-		alphaAnimation.setDuration(9000);
+		alphaAnimation.setDuration(7000);
 		layout.setAnimation(alphaAnimation);
 		layout.startAnimation(alphaAnimation);
 		

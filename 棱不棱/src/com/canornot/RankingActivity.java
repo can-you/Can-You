@@ -82,10 +82,10 @@ public class RankingActivity extends Activity implements OnClickListener {
 		Intent intent = getIntent();
 		 score = intent.getIntExtra("CurrentScore", -1);
 		int flag = 0;
-		if(score <= 150){
+		if(score <= 100){
 			flag = 6;
 		}
-		else if(score <= 160){
+		else if(score <= 150){
 			flag = 1;
 		}else if (score <= 180) {
 			flag = 2;
@@ -138,7 +138,7 @@ public class RankingActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.btnRunSecondGame:
 			if(score<=150){
-				 builder.setMessage("打穿第一关先，少年，");
+				 builder.setMessage("打穿第一关先，少年");
 			        builder.setPositiveButton("我 去", null);
 			        builder.show();
 			}
